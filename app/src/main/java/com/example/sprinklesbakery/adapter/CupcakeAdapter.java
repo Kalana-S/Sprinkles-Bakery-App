@@ -1,29 +1,36 @@
 package com.example.sprinklesbakery.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ImageView;
-import android.net.Uri;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sprinklesbakery.R;
 import com.example.sprinklesbakery.data.model.Cupcake;
 import java.util.ArrayList;
 import java.util.List;
+
 public class CupcakeAdapter extends RecyclerView.Adapter<CupcakeAdapter.CupcakeViewHolder> {
 
     private List<Cupcake> cupcakeList = new ArrayList<>();
     private OnCupcakeDeleteListener deleteListener;
+    private OnCupcakeUpdateListener updateListener;
 
     public interface OnCupcakeDeleteListener {
         void onDeleteCupcake(Cupcake cupcake);
     }
 
-    public CupcakeAdapter(OnCupcakeDeleteListener deleteListener) {
+    public interface OnCupcakeUpdateListener {
+        void onUpdateCupcake(Cupcake cupcake);
+    }
+
+    public CupcakeAdapter(OnCupcakeDeleteListener deleteListener, OnCupcakeUpdateListener updateListener) {
         this.deleteListener = deleteListener;
+        this.updateListener = updateListener;
     }
 
     @NonNull
@@ -36,14 +43,17 @@ public class CupcakeAdapter extends RecyclerView.Adapter<CupcakeAdapter.CupcakeV
     @Override
     public void onBindViewHolder(@NonNull CupcakeViewHolder holder, int position) {
         Cupcake cupcake = cupcakeList.get(position);
+
         holder.tvCupcakeName.setText(cupcake.getCupcakeName());
         holder.tvCategory.setText("Category: " + cupcake.getCategory());
         holder.tvPrice.setText("Price: $" + cupcake.getPrice());
         holder.tvQuantity.setText("Quantity: " + cupcake.getQuantity());
 
-        if (cupcake.getImageUri() != null && !cupcake.getImageUri().isEmpty()) {
+        String imageUriString = cupcake.getImageUri();
+        if (imageUriString != null && !imageUriString.isEmpty()) {
             try {
-                holder.imageCupcake.setImageURI(Uri.parse(cupcake.getImageUri()));
+                Uri imageUri = Uri.parse(imageUriString);
+                holder.imageCupcake.setImageURI(imageUri);
             } catch (Exception e) {
                 e.printStackTrace();
                 holder.imageCupcake.setImageResource(android.R.drawable.ic_menu_gallery);
@@ -51,8 +61,8 @@ public class CupcakeAdapter extends RecyclerView.Adapter<CupcakeAdapter.CupcakeV
         } else {
             holder.imageCupcake.setImageResource(android.R.drawable.ic_menu_gallery);
         }
-
         holder.btnDelete.setOnClickListener(v -> deleteListener.onDeleteCupcake(cupcake));
+        holder.btnUpdate.setOnClickListener(v -> updateListener.onUpdateCupcake(cupcake));
     }
 
     @Override
@@ -65,10 +75,14 @@ public class CupcakeAdapter extends RecyclerView.Adapter<CupcakeAdapter.CupcakeV
         notifyDataSetChanged();
     }
 
+    public List<Cupcake> getCupcakeList() {
+        return cupcakeList;
+    }
+
     static class CupcakeViewHolder extends RecyclerView.ViewHolder {
         TextView tvCupcakeName, tvCategory, tvPrice, tvQuantity;
         ImageView imageCupcake;
-        Button btnDelete;
+        Button btnDelete, btnUpdate;
 
         public CupcakeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,11 +92,8 @@ public class CupcakeAdapter extends RecyclerView.Adapter<CupcakeAdapter.CupcakeV
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             imageCupcake = itemView.findViewById(R.id.imageCupcake);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnUpdate = itemView.findViewById(R.id.btnUpdate);
         }
-    }
-
-    public List<Cupcake> getCupcakeList() {
-        return cupcakeList;
     }
 
 }

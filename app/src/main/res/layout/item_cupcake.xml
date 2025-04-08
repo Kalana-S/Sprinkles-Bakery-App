@@ -1,29 +1,18 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="15dp"
-    android:background="@drawable/textview_border"
     android:layout_margin="5dp"
-    android:elevation="2dp">
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:textColor="@android:color/white"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="4dp" />
+    android:background="@drawable/textview_border"
+    android:elevation="2dp"
+    android:gravity="center_horizontal">
 
     <ImageView
         android:id="@+id/imageCupcake"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="10dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="12dp"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -31,11 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_toEndOf="@id/imageCupcake"
-        android:layout_toStartOf="@id/btnDelete"
-        android:layout_alignTop="@id/imageCupcake"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        android:paddingHorizontal="10dp"
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/tvCupcakeName"
@@ -44,7 +30,8 @@
             android:text="Cupcake Name"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginBottom="4dp" />
 
         <TextView
             android:id="@+id/tvCategory"
@@ -53,7 +40,8 @@
             android:text="Category"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#F6B606" />
+            android:textColor="#F6B606"
+            android:layout_marginBottom="2dp" />
 
         <TextView
             android:id="@+id/tvPrice"
@@ -62,7 +50,8 @@
             android:text="Price"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#F6B606" />
+            android:textColor="#F6B606"
+            android:layout_marginBottom="2dp" />
 
         <TextView
             android:id="@+id/tvQuantity"
@@ -75,4 +64,31 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/holo_red_light" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:textColor="@color/black"
+            android:backgroundTint="#1EF606" />
+
+    </LinearLayout>
+
+</LinearLayout>

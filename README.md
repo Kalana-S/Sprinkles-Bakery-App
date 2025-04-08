@@ -18,10 +18,15 @@ Sprinkles-Bakery is a feature-rich Android application designed with a futuristi
   - Responsive layout for a seamless experience across devices.
 
 - **✅ (New!)**
-  - Add and view cupcakes images.
+  - **Update Cupcake Details (Admin):**  
+    Admins can now edit existing cupcake entries including name, category, price, quantity, and image using a dedicated update interface.
+
+- **✅ (New!)**
+  - **Update Member Profile (Member):**  
+    Members can now securely update their profile information such as name, email, and password. After a successful update, members are redirected to the login screen to re-authenticate.
 
 ## Screenshots
-![image](./img/img.png)
+![image](./img/img1.png)
 
 ## 🛠️ Technologies Used
 

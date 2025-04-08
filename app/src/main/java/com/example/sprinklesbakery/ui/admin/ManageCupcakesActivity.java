@@ -1,9 +1,11 @@
 package com.example.sprinklesbakery.ui.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +16,11 @@ import com.example.sprinklesbakery.viewmodel.CupcakeViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageCupcakesActivity extends AppCompatActivity implements CupcakeAdapter.OnCupcakeDeleteListener {
+public class ManageCupcakesActivity extends AppCompatActivity implements CupcakeAdapter.OnCupcakeDeleteListener, CupcakeAdapter.OnCupcakeUpdateListener {
 
     private CupcakeViewModel cupcakeViewModel;
     private CupcakeAdapter cupcakeAdapter;
+    private ActivityResultLauncher<Intent> updateCupcakeLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +30,25 @@ public class ManageCupcakesActivity extends AppCompatActivity implements Cupcake
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCupcakes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cupcakeAdapter = new CupcakeAdapter(this);
+        cupcakeAdapter = new CupcakeAdapter(this, this);
         recyclerView.setAdapter(cupcakeAdapter);
 
         cupcakeViewModel = new ViewModelProvider(this).get(CupcakeViewModel.class);
-        cupcakeViewModel.getAllCupcakes().observe(this, new Observer<List<Cupcake>>() {
-            @Override
-            public void onChanged(List<Cupcake> cupcakes) {
-                cupcakeAdapter.setCupcakeList(cupcakes);
-            }
+        observeCupcakes();
+
+        updateCupcakeLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        cupcakeViewModel.refreshCupcakes();
+                    }
+                }
+        );
+    }
+
+    private void observeCupcakes() {
+        cupcakeViewModel.getAllCupcakes().observe(this, cupcakes -> {
+            cupcakeAdapter.setCupcakeList(cupcakes);
         });
     }
 
@@ -47,6 +60,13 @@ public class ManageCupcakesActivity extends AppCompatActivity implements Cupcake
         List<Cupcake> updatedList = new ArrayList<>(cupcakeAdapter.getCupcakeList());
         updatedList.remove(cupcake);
         cupcakeAdapter.setCupcakeList(updatedList);
+    }
+
+    @Override
+    public void onUpdateCupcake(Cupcake cupcake) {
+        Intent intent = new Intent(this, UpdateCupcakeActivity.class);
+        intent.putExtra("cupcake", cupcake);
+        updateCupcakeLauncher.launch(intent);
     }
 
 }

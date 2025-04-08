@@ -10,7 +10,7 @@ import com.example.sprinklesbakery.ui.main.MainActivity;
 
 public class MemberMainActivity extends AppCompatActivity {
 
-    private Button btnOrderCupcakes, btnViewCupcakes, btnViewOrders, btnLogout;
+    private Button btnOrderCupcakes, btnViewCupcakes, btnViewOrders, btnLogout, btnUpdateProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class MemberMainActivity extends AppCompatActivity {
         btnViewCupcakes = findViewById(R.id.btnViewCupcakes);
         btnViewOrders = findViewById(R.id.btnViewOrders);
         btnLogout = findViewById(R.id.btnLogout);
+        btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
 
         btnOrderCupcakes.setOnClickListener(v -> {
             Intent intent = new Intent(MemberMainActivity.this, OrderCupcakeActivity.class);
@@ -42,6 +43,10 @@ public class MemberMainActivity extends AppCompatActivity {
             Intent intent = new Intent(MemberMainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        });
+
+        btnUpdateProfile.setOnClickListener(v -> {
+            startActivity(new Intent(MemberMainActivity.this, UpdateMemberActivity.class));
         });
 
     }

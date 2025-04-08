@@ -16,4 +16,5 @@ public interface CategoryDao {
 
     @Delete
     void delete(Category category);
+
 }

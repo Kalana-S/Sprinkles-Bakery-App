@@ -2,7 +2,6 @@ package com.example.sprinklesbakery.data.repository;
 
 import android.content.Context;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import com.example.sprinklesbakery.data.database.AppDatabase;
 import com.example.sprinklesbakery.data.dao.CupcakeDao;
 import com.example.sprinklesbakery.data.model.Cupcake;
@@ -13,11 +12,12 @@ import java.util.concurrent.Executors;
 public class CupcakeRepository {
 
     private CupcakeDao cupcakeDao;
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private ExecutorService executor;
 
     public CupcakeRepository(Context context) {
         AppDatabase db = AppDatabase.getInstance(context);
         cupcakeDao = db.cupcakeDao();
+        executor = Executors.newSingleThreadExecutor();
     }
 
     public void insert(Cupcake cupcake) {
@@ -25,9 +25,7 @@ public class CupcakeRepository {
     }
 
     public LiveData<List<Cupcake>> getAllCupcakes() {
-        MutableLiveData<List<Cupcake>> cupcakesLiveData = new MutableLiveData<>();
-        executor.execute(() -> cupcakesLiveData.postValue(cupcakeDao.getAllCupcakes()));
-        return cupcakesLiveData;
+        return cupcakeDao.getAllCupcakes();
     }
 
     public void delete(Cupcake cupcake) {

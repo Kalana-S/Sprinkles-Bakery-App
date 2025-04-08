@@ -8,6 +8,7 @@ import com.example.sprinklesbakery.data.repository.CupcakeRepository;
 import java.util.List;
 
 public class CupcakeViewModel extends AndroidViewModel {
+
     private CupcakeRepository repository;
     private LiveData<List<Cupcake>> allCupcakes;
 
@@ -19,6 +20,10 @@ public class CupcakeViewModel extends AndroidViewModel {
 
     public LiveData<List<Cupcake>> getAllCupcakes() {
         return allCupcakes;
+    }
+
+    public void refreshCupcakes() {
+        allCupcakes = repository.getAllCupcakes();
     }
 
     public void insert(Cupcake cupcake) {

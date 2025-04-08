@@ -36,4 +36,12 @@ public class MemberRepository {
         }
     }
 
+    public void updateMember(int id, String name, String email, String password) {
+        AsyncTask.execute(() -> memberDao.updateMember(id, name, email, password));
+    }
+
+    public Member getMemberById(int id) {
+        return memberDao.getMemberById(id);
+    }
+
 }

@@ -43,7 +43,7 @@
         android:layout_marginTop="161dp"
         android:hint="Member Name"
         android:text=""
-        android:textSize="16dp"
+        android:textSize="18dp"
         android:textColor="#22F606"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,6 @@
         android:text=""
         android:textSize="16dp"
         android:textColor="#22F606"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMemberName" />
 
@@ -71,7 +70,6 @@
         android:text=""
         android:textSize="16dp"
         android:textColor="#22F606"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMemberEmail" />
 
@@ -84,7 +82,6 @@
         android:text=""
         android:textColor="#F6B606"
         android:textSize="18dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spCupcake" />
@@ -110,7 +107,6 @@
         android:text=""
         android:textColor="#F6B606"
         android:textSize="18dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etQuantity" />
@@ -119,10 +115,10 @@
         android:id="@+id/spCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="85dp"
+        android:backgroundTint="#F6B606"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="#F6B606"
         app:layout_constraintTop_toBottomOf="@+id/tvMemberId" />
 
     <Spinner
@@ -144,9 +140,9 @@
         android:hint="Quantity"
         android:inputType="text"
         android:text=""
+        android:textSize="18dp"
         android:textColorHint="#F6B606"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:backgroundTint="#F6B606"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
