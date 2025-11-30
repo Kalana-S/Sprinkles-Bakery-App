@@ -1,6 +1,6 @@
 # Sprinkles Bakery Android Application
 
-Sprinkles-Bakery is a feature-rich Android application designed with a futuristic and attractive user interface. The system enables seamless Cupcake ordering experiences while ensuring authentication and session management for different user roles.
+Sprinkles-Bakery is a feature-rich **Android application** designed with a futuristic and attractive user interface. The system enables seamless Cupcake ordering experiences while ensuring authentication and session management for different user roles.
 
 ## 🚀 Features
 
